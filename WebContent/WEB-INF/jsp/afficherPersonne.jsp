@@ -5,10 +5,10 @@
     <head>
         <meta charset="utf-8" />
         <title>Affichage d'un personne</title>
-        <link type="text/css" rel="stylesheet" href="<c:url value="/inc/style.css"/>" />
+        <link type="text/css" rel="stylesheet" href="<c:url value="<%=request.getContextPath()%>/resources/css/style.css"/>" />
     </head>
     <body>
-        <c:import url="/inc/menu.jsp" />
+        <c:import url="/WEB-INF/inc/menu.jsp" />
         <div id="corps">
             <p class="info">${ form.resultat }</p>
             <p>Nom : <c:out value="${ personne.nom }"/></p>

@@ -27,6 +27,7 @@ public class PersonneController {
         return "creerPersonne";
     }
     
+    
     /**************************** LISTE PERSONNE ****************************/
     
     @RequestMapping(value = "/listePersonnes", method = RequestMethod.GET)
@@ -34,6 +35,9 @@ public class PersonneController {
         return "listerPersonnes";
     }
 
+    
+    
+    
     
     @ModelAttribute("groupe_personne")
     public Map<String, String> productTypes() {

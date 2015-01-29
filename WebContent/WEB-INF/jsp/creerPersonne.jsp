@@ -5,7 +5,7 @@
     <head>
         <meta charset="utf-8" />
         <title>Création d'un personne</title>
-        <link type="text/css" rel="stylesheet" href="<c:url value="/WEB-INF/inc/style.css"/>" />
+        <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/style.css" />
     </head>
     <body>
         <c:import url="/WEB-INF/inc/menu.jsp" />

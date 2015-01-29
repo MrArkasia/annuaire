@@ -5,7 +5,7 @@
     <head>
         <meta charset="utf-8" />
         <title>Liste des personnes existants</title>
-        <link type="text/css" rel="stylesheet" href="../../inc/style.css" />
+        <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/style.css" />
     </head>
     <body>
         <c:import url="/WEB-INF/inc/menu.jsp" />
@@ -40,12 +40,12 @@
                     <%-- Lien vers la servlet de modification, avec passage du nom du personne - c'est-à-dire la clé de la Map - en paramètre grâce à la balise <c:param/>. --%>
                     <td class="action">
                         <a href="<c:url value="/modifierPersonne"><c:param name="idPersonne" value="${ mapPersonnes.key }" /></c:url>">
-                            <img src="<c:url value="/WEB-INF/inc/modifier.png"/>" alt="Modifier" />
+                            <img src="<%=request.getContextPath()%>/resources/images/modifier.png" alt="Modifier" />
                         </a>
                     </td>
                     <td class="action">
                         <a href="<c:url value="/suppressionPersonne"><c:param name="idPersonne" value="${ mapPersonnes.key }" /></c:url>">
-                            <img src="<c:url value="/WEB-INF/inc/supprimer.png"/>" alt="Supprimer" />
+                            <img src="<%=request.getContextPath()%>/resources/images/supprimer.png" alt="Supprimer" />
                         </a>
                     </td>
                 </tr>

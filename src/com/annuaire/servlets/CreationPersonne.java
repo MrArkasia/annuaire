@@ -24,7 +24,7 @@ public class CreationPersonne extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	
-	public static final String CHEMIN          = "chemin";
+	//public static final String CHEMIN          = "chemin";
     public static final String ATT_CLIENT      = "personne";
     public static final String ATT_FORM        = "form";
     public static final String SESSION_CLIENTS = "personnes";
@@ -45,7 +45,7 @@ public class CreationPersonne extends HttpServlet {
          * Lecture du param�tre 'chemin' pass� � la servlet via la d�claration
          * dans le web.xml
          */
-        String chemin = this.getServletConfig().getInitParameter( CHEMIN );
+        String chemin = this.getServletConfig().getInitParameter( null );
 
         /* Pr�paration de l'objet formulaire */
         CreationPersonneForm form = new CreationPersonneForm( personneDao );

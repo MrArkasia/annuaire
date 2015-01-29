@@ -18,19 +18,15 @@ import com.annuaire.entities.Personne;
 
 @WebServlet( urlPatterns = { "/suppressionPersonne" } )
 public class SuppressionPersonne extends HttpServlet {
-	
-    /**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	
 	public static final String PARAM_ID_CLIENT = "idPersonne";
     public static final String SESSION_CLIENTS = "personnes";
-
     public static final String VUE             = "/listePersonnes";
 
     @EJB
-    private PersonneDao          personneDao;
+    private PersonneDao personneDao;
 
     public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
     	
