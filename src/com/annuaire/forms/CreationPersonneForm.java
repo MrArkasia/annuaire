@@ -33,14 +33,24 @@ public final class CreationPersonneForm {
         return resultat;
     }
 
-    public Personne creerPersonne( HttpServletRequest request, String chemin ) {
+    public Personne creerPersonne( HttpServletRequest request) {
+    	
         String nom 			= getValeurChamp( request, CHAMP_NOM );
         String prenom 		= getValeurChamp( request, CHAMP_PRENOM );
         String email 		= getValeurChamp( request, CHAMP_EMAIL );
         String mp 			= getValeurChamp( request, CHAMP_MP );
         String site 		= getValeurChamp( request, CHAMP_SITE );
         String naissance 	= getValeurChamp( request, CHAMP_NAISSANCE );
-
+        
+        System.out.println("---------------------------");
+        System.out.println("Nom       : " + nom);
+        System.out.println("Preom     : " + prenom);
+        System.out.println("email     : " + email);
+        System.out.println("mp        : " + mp);
+        System.out.println("site      : " + site);
+        System.out.println("naissance : " + naissance);
+        System.out.println("---------------------------");
+        
         Personne personne = new Personne();
 
         traiterNom( nom, personne );
@@ -129,13 +139,9 @@ public final class CreationPersonneForm {
 
     
     private void validationNom( String nom ) throws FormValidationException {
-        if ( nom != null ) {
-            if ( nom.length() < 2 ) {
-                throw new FormValidationException( "Le nom d'utilisateur doit contenir au moins 2 caractères." );
-            }
-        } else {
-            throw new FormValidationException( "Merci d'entrer un nom d'utilisateur." );
-        }
+    	if ( nom != null && nom.length() < 2 ) {
+    		throw new FormValidationException( "Le nom d'utilisateur doit contenir au moins 2 caractères." );
+    	}
     }
 
     private void validationPrenom( String prenom ) throws FormValidationException {
@@ -161,18 +167,14 @@ public final class CreationPersonneForm {
     }
     
     private void validationSite( String site ) throws FormValidationException {
-        if ( site != null ) {
-            //TODO
-        } else {
-            //TODO
+    	if ( site != null && site.length() < 3 ) {
+        	throw new FormValidationException( "L'adresse du site web doit contenir au moins 3 caractères.." );
         }
     }
     
     private void validationNaissance( String naissance ) throws FormValidationException {
-        if ( naissance != null ) {
-            //TODO
-        } else {
-            //TODO
+        if ( naissance != null && naissance.length() < 3 ) {
+        	throw new FormValidationException( "Merci d'entrer une date de naissance." );
         }
     }
     

@@ -2,6 +2,8 @@ package com.annuaire.dao;
 
 import java.util.List;
 
+import javax.ejb.LocalBean;
+import javax.ejb.Startup;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -10,6 +12,8 @@ import javax.persistence.TypedQuery;
 import com.annuaire.entities.Personne;
 
 @Stateless
+@LocalBean()
+@Startup
 public class PersonneDao {
 
     // Injection du manager, qui s'occupe de la connexion avec la BDD
