@@ -18,27 +18,19 @@ public final class ConnexionForm {
     private String              resultat;
     private Map<String, String> erreurs      = new HashMap<String, String>();
 
-	/**
-	 * 
-	 * @return resultat
-	 */
     public String getResultat() {
         return resultat;
     }
-    
-    /**
-     * 
-     * @return erreur
-     */
+
     public Map<String, String> getErreurs() {
         return erreurs;
     }
-    
+
     /**
-     * Permet la connection d'une personne 
-     * 
+     * Methode permettant la connection et qui verifie si l'email, le mot de passe est valide,
+     * ainsi que si la personne est presente en base
      * @param request
-     * @return utilisteur, retourne la personne qui s'est connecter
+     * @return utilisateur si le resultat de la requete est valide sinon erreur
      */
     public Personne connecterPersonne( HttpServletRequest request ) {
         /* R�cup�ration des champs du formulaire */
@@ -83,9 +75,7 @@ public final class ConnexionForm {
 
 
     /**
-     * 
-     * Valide l'adresse email saisie.
-     * 
+     * Methode qui valide l'adresse email saisie.
      * @param email
      * @throws Exception
      */
@@ -98,10 +88,9 @@ public final class ConnexionForm {
         }
     }
 
+
     /**
-     * 
-     * Valide le mot de passe saisie.
-     * 
+     * Methode qui valide le mot de passe saisi.
      * @param motDePasse
      * @throws Exception
      */
@@ -114,11 +103,11 @@ public final class ConnexionForm {
             throw new Exception( "Merci de saisir votre mot de passe." );
         }
     }
+    
 
     /**
      * 
-     * Valide la presence en base.
-     * 
+     * Methode qui valide la presence en base.
      * @param email
      * @param motDePasse
      * @param request
@@ -164,19 +153,19 @@ public final class ConnexionForm {
      * Ajoute un message correspondant au champ specifique a la map des erreurs.
      * @param champ
      * @param message
+     * message d erreur
      */
     private void setErreur( String champ, String message ) {
         erreurs.put( champ, message );
     }
 
-
+    
     /**
-     * 
      * Methode utilitaire qui retourne null si un champ est vide, et son contenu
      * sinon.
      * @param request
      * @param nomChamp
-     * @return
+     * @return valeur
      */
     private static String getValeurChamp( HttpServletRequest request, String nomChamp ) {
         String valeur = request.getParameter( nomChamp );

@@ -92,7 +92,7 @@ public class OutilsController {
 
 	/********************************** SUPPRIMER PERSONNE ***************************************/
 	/**
-	 * 
+	 * Methode de suppression d'une personne
 	 * @param request
 	 * @param personneDao
 	 * @return
@@ -119,7 +119,7 @@ public class OutilsController {
 	
 	/********************************** MODIFIER PERSONNE ***************************************/
 	/**
-	 * 
+	 * Methode de modification des donnees d'une personne
 	 * @param request
 	 * @param personneDao
 	 * @param idtmp
@@ -172,14 +172,16 @@ public class OutilsController {
 	/************************************* CONNEXION ******************************************/
 	/**
 	 * 
+	 * Methode permettant la connexion au formulaire
+	 * 
 	 * @param request
 	 * @param personneDao
-	 * @return
+	 * @return listerPersonnes
 	 */
 	public String connexion(HttpServletRequest request, PersonneDao personneDao) {
 		HttpSession session = request.getSession();
 	
-		/* Pr�paration de l'objet formulaire */
+		/* Preparation de l'objet formulaire */
 	    ConnexionForm form = new ConnexionForm();
 	
 	    /* Traitement de la requ�te et r�cup�ration du bean en r�sultant */
@@ -204,15 +206,14 @@ public class OutilsController {
 
 	/************************************* UTILITAIRE ******************************************/	
 	
-	
-	/**
-	 * 
-	 * Methode utilitaire qui retourne null si un parametre est vide, et son contenu sinon.
-	 * @param request
-	 * @param nomChamp
-	 * @return
-	 */
-    private static String getValeurParametre( HttpServletRequest request, String nomChamp ) {
+    /**
+     * 
+     * Methode utilitaire qui retourne null si un parametre est vide, et son contenu sinon.
+     * @param request
+     * @param nomChamp
+     * @return valeur
+     */
+	private static String getValeurParametre( HttpServletRequest request, String nomChamp ) {
         String valeur = request.getParameter( nomChamp );
         if ( valeur == null || valeur.trim().length() == 0 ) {
             return null;
