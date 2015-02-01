@@ -1,3 +1,6 @@
+/**
+ * Package contenant le controlleur de l'application
+ */
 package com.annuaire.controleur;
 
 import java.util.HashMap;
@@ -20,7 +23,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.annuaire.dao.PersonneDao;
 import com.annuaire.entities.Personne;
 import com.annuaire.forms.OutilsController;
-
+/**
+ * Controller de l'application
+ * @author michaelplong et amaury doudement
+ *
+ */
 @Controller()
 @RequestMapping("/my")
 public class PersonneController {
@@ -36,19 +43,40 @@ public class PersonneController {
     OutilsController outils = new OutilsController();
 
     /**************************** CREER PERSONNE *****************************/
-
+   
+    /**
+     * 
+     * @param request 
+     * Requete par l intermediaire de l API Servlet.
+     * @param response 
+     * Reponse de la requete par l intermediaire de l API Servlet.
+     * @return creerPersonne
+     */
     @RequestMapping(value = "/creationPersonne", method = RequestMethod.GET)
     public String creerPersonneForm(HttpServletRequest request, HttpServletResponse response) {
         return "creerPersonne";
     }
-
+    
+    /**
+     * 
+     * @param map, Modele utilisé pour les donnees présentées dans la vue. 
+     * Permet d’avoir acces aux données contenues dans le modele et de les manipuler.
+     * @param request 
+     * Requete par l intermediaire de l API Servlet.
+     * @param response 
+     * Reponse de la requete par l intermediaire de l API Servlet.
+     * @return
+     */
     @RequestMapping(value = "/creationPersonne", method = RequestMethod.POST)
     public String creerPersonne(ModelMap map,HttpServletRequest request, HttpServletResponse response) {
 	    return outils.ajouterPersonne(request, personneDao);
 	}
 
     /**************************** LISTE PERSONNE *****************************/
-    
+    /**
+     * 
+     * @return
+     */
     @RequestMapping(value = "/listePersonnes", method = RequestMethod.GET)
     public String listPersonne() {
         return "listerPersonnes";
@@ -56,27 +84,56 @@ public class PersonneController {
     
     /************************ SUPPRIMER PERSONNE *****************************/
 
+    /**
+     * 
+     * @param request 
+     * Requete par l intermediaire de l API Servlet.
+     * @param response 
+     * Reponse de la requete par l intermediaire de l API Servlet.
+     * @return
+     */
     @RequestMapping(value = "/suppressionPersonne", method = RequestMethod.GET)
     public String suppressionPersonne(HttpServletRequest request, HttpServletResponse response) {
         return outils.supprimerPersonne(request, personneDao);
     }
 
     /**************************** FICHE PERSONNE *****************************/
-    
+    /**
+     * 
+     * @param request 
+     * Requete par l intermediaire de l API Servlet.
+     * @param response 
+     * Reponse de la requete par l intermediaire de l API Servlet.
+     * @return
+     */
     @RequestMapping(value = "/afficherPersonne", method = RequestMethod.GET)
     public String detailPersonne(HttpServletRequest request, HttpServletResponse response) {
     	return outils.trouverPersonne(request, personneDao, "afficherPersonne");
     }
     
     /******************************* CONNEXION *******************************/
-    
+    /**
+     * 
+     * @param request 
+     * Requete par l intermediaire de l API Servlet.
+     * @param response 
+     * Reponse de la requete par l intermediaire de l API Servlet.
+     * @return
+     */
     @RequestMapping(value = "/connexion", method = RequestMethod.POST)
     public String connexionPersonne(HttpServletRequest request, HttpServletResponse response) {
     	return outils.connexion(request, personneDao);
     }
     
     /****************************** DECONNEXION ******************************/
-    
+    /**
+     * 
+     * @param request 
+     * Requete par l intermediaire de l API Servlet.
+     * @param response 
+     * Reponse de la requete par l intermediaire de l API Servlet.
+     * @return
+     */
     @RequestMapping(value = "/deconnexion", method = RequestMethod.GET)
     public String deconnexionPersonne(HttpServletRequest request, HttpServletResponse response) {
     	HttpSession session = request.getSession();
@@ -86,7 +143,14 @@ public class PersonneController {
     }
     
     /********************* RECUPERATION DE MOT DE PASSE **********************/
-    
+    /**
+     * 
+     * @param request 
+     * Requete par l intermediaire de l API Servlet.
+     * @param response 
+     * Reponse de la requete par l intermediaire de l API Servlet.
+     * @return
+     */
     @RequestMapping(value = "recuperationMotPasse", method = RequestMethod.GET)
     public String recuperationMotPasseGet(HttpServletRequest request, HttpServletResponse response) {
     	HttpSession session = request.getSession();
@@ -94,7 +158,14 @@ public class PersonneController {
     	session.setAttribute("recoveryId", null);
     	return "recuperationMotPasse";
     }
-    
+    /**
+     * 
+     * @param request 
+     * Requete par l intermediaire de l API Servlet.
+     * @param response 
+     * Reponse de la requete par l intermediaire de l API Servlet.
+     * @return
+     */
     @RequestMapping(value = "recuperationMotPasse", method = RequestMethod.POST)
     public String recuperationMotPassePost(HttpServletRequest request, HttpServletResponse response) {
 
@@ -130,13 +201,27 @@ public class PersonneController {
     /*************************** MODIFIER PERSONNE ***************************/
       
     String idtmp;
-    
+    /**
+     * 
+     * @param request 
+     * Requete par l intermediaire de l API Servlet.
+     * @param response 
+     * Reponse de la requete par l intermediaire de l API Servlet.
+     * @return
+     */
     @RequestMapping(value = "/modifierPersonne", method = RequestMethod.GET)
     public String modifierPersonneGet(HttpServletRequest request, HttpServletResponse response) {
     	idtmp = request.getParameter("idPersonne");
     	return outils.trouverPersonne(request, personneDao, "modifierPersonne");
     }
-    
+    /**
+     * 
+     * @param request 
+     * Requete par l intermediaire de l API Servlet.
+     * @param response 
+     * Reponse de la requete par l intermediaire de l API Servlet.
+     * @return
+     */
     @RequestMapping(value = "/modifierPersonne", method = RequestMethod.POST)
     public String modifierPersonnePost(HttpServletRequest request, HttpServletResponse response) {
     	return outils.modifierPersonne(request, personneDao, idtmp);

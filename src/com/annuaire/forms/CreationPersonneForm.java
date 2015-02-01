@@ -57,13 +57,13 @@ public final class CreationPersonneForm {
         try {
             if ( erreurs.isEmpty() ) {
                 personneDao.creer( personne );
-                resultat = "Succès de la création de la personne.";
+                resultat = "Succï¿½s de la crï¿½ation de la personne.";
             } else {
-                resultat = "Échec de la création de la personne.";
+                resultat = "ï¿½chec de la crï¿½ation de la personne.";
             }
         } catch ( DAOException e ) {
-            setErreur( "imprévu", "Erreur imprévue lors de la création." );
-            resultat = "Échec de la création de la personne : une erreur imprévue est survenue, merci de réessayer dans quelques instants.";
+            setErreur( "imprï¿½vu", "Erreur imprï¿½vue lors de la crï¿½ation." );
+            resultat = "ï¿½chec de la crï¿½ation de la personne : une erreur imprï¿½vue est survenue, merci de rï¿½essayer dans quelques instants.";
             e.printStackTrace();
         }
 
@@ -143,13 +143,13 @@ public final class CreationPersonneForm {
     
     private void validationNom( String nom ) throws FormValidationException {
     	if ( nom != null && nom.length() < 2 ) {
-    		throw new FormValidationException( "Le nom d'utilisateur doit contenir au moins 2 caractères." );
+    		throw new FormValidationException( "Le nom d'utilisateur doit contenir au moins 2 caractï¿½res." );
     	}
     }
 
     private void validationPrenom( String prenom ) throws FormValidationException {
         if ( prenom != null && prenom.length() < 2 ) {
-            throw new FormValidationException( "Le prénom d'utilisateur doit contenir au moins 2 caractères." );
+            throw new FormValidationException( "Le prï¿½nom d'utilisateur doit contenir au moins 2 caractï¿½res." );
         }
     }
 
@@ -166,7 +166,7 @@ public final class CreationPersonneForm {
     private void validationMp( String mp ) throws FormValidationException {
         if ( mp != null ) {
             if ( mp.length() < 8 ) {
-                throw new FormValidationException( "Le mot de passe doit contenir au moins 8 caractères." );
+                throw new FormValidationException( "Le mot de passe doit contenir au moins 8 caractï¿½res." );
             }
         } else {
             throw new FormValidationException( "Merci d'entrer un mot de passe." );
@@ -175,7 +175,7 @@ public final class CreationPersonneForm {
     
     private void validationSite( String site ) throws FormValidationException {
     	if ( site != null && site.length() < 3 ) {
-        	throw new FormValidationException( "L'adresse du site web doit contenir au moins 3 caractères.." );
+        	throw new FormValidationException( "L'adresse du site web doit contenir au moins 3 caractï¿½res.." );
         }
     }
     
@@ -196,14 +196,14 @@ public final class CreationPersonneForm {
     
 
     /*
-     * Ajoute un message correspondant au champ spécifié à la map des erreurs.
+     * Ajoute un message correspondant au champ spï¿½cifiï¿½ ï¿½ la map des erreurs.
      */
     private void setErreur( String champ, String message ) {
         erreurs.put( champ, message );
     }
 
     /*
-     * Méthode utilitaire qui retourne null si un champ est vide, et son contenu
+     * Mï¿½thode utilitaire qui retourne null si un champ est vide, et son contenu
      * sinon.
      */
     private static String getValeurChamp( HttpServletRequest request, String nomChamp ) {
