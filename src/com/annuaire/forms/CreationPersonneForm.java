@@ -16,6 +16,7 @@ public final class CreationPersonneForm {
     private static final String CHAMP_MP     	= "mpPersonne";
     private static final String CHAMP_SITE     	= "siteWebPersonne";
     private static final String CHAMP_NAISSANCE	= "naissancePersonne";
+    private static final String CHAMP_GROUPE	= "groupe";
 
     private String              resultat;
     private Map<String, String> erreurs         = new HashMap<String, String>();
@@ -41,6 +42,7 @@ public final class CreationPersonneForm {
         String mp 			= getValeurChamp( request, CHAMP_MP );
         String site 		= getValeurChamp( request, CHAMP_SITE );
         String naissance 	= getValeurChamp( request, CHAMP_NAISSANCE );
+        String groupe 		= getValeurChamp( request, CHAMP_GROUPE );
         
         System.out.println("---------------------------");
         System.out.println("Nom       : " + nom);
@@ -49,6 +51,7 @@ public final class CreationPersonneForm {
         System.out.println("mp        : " + mp);
         System.out.println("site      : " + site);
         System.out.println("naissance : " + naissance);
+        System.out.println("groupe    : " + groupe);
         System.out.println("---------------------------");
         
         Personne personne = new Personne();
@@ -59,6 +62,7 @@ public final class CreationPersonneForm {
         traiterMp( mp, personne );
         traiterSite( site, personne );
         traiterNaissance( naissance, personne );
+        traiterGroupe( groupe, personne );
 
         try {
             if ( erreurs.isEmpty() ) {
@@ -134,6 +138,15 @@ public final class CreationPersonneForm {
         personne.setDateNaissance( naissance );
     }
     
+    private void traiterGroupe( String groupe, Personne personne ) {
+        try {
+            validationGroupe( groupe );
+        } catch ( FormValidationException e ) {
+            setErreur( CHAMP_GROUPE, e.getMessage() );
+        }
+        personne.setDateNaissance( groupe );
+    }
+    
     
     /*------------------------------ VALIDATIONS ------------------------------*/
 
@@ -151,8 +164,12 @@ public final class CreationPersonneForm {
     }
 
     private void validationEmail( String email ) throws FormValidationException {
-        if ( email != null && !email.matches( "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)" ) ) {
-            throw new FormValidationException( "Merci de saisir une adresse mail valide." );
+        if ( email != null){
+        	if(!email.matches( "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)" ) ) {
+                throw new FormValidationException( "Merci de saisir une adresse mail valide." );
+        	}
+        } else {
+        	throw new FormValidationException( "Merci d'entrer une adresse email." );
         }
     }
     
@@ -176,6 +193,12 @@ public final class CreationPersonneForm {
         if ( naissance != null && naissance.length() < 3 ) {
         	throw new FormValidationException( "Merci d'entrer une date de naissance." );
         }
+    }
+    
+    private void validationGroupe( String groupe ) throws FormValidationException {
+        /*if ( groupe.equals("null") ) {
+        	throw new FormValidationException( "Merci de choisir un groupe." );
+        }*/
     }
     
 

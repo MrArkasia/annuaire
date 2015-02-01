@@ -16,7 +16,6 @@ import com.annuaire.entities.Personne;
 @Startup
 public class PersonneDao {
 
-    // Injection du manager, qui s'occupe de la connexion avec la BDD
     @PersistenceContext( unitName = "myJta" )
     private EntityManager em;
 
@@ -38,7 +37,7 @@ public class PersonneDao {
 
     public List<Personne> lister() throws DAOException {
         try {
-            TypedQuery<Personne> query = em.createQuery( "SELECT c FROM Personne c ORDER BY c.id", Personne.class );
+            TypedQuery<Personne> query = em.createQuery( "SELECT c FROM Personne c ORDER BY c.nom", Personne.class );
             return query.getResultList();
         } catch ( Exception e ) {
             throw new DAOException( e );
@@ -52,4 +51,5 @@ public class PersonneDao {
             throw new DAOException( e );
         }
     }
+
 }

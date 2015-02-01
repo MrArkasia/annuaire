@@ -36,3 +36,17 @@
 <input type="text" id="naissancePersonne" name="naissancePersonne" value="<c:out value="${personne.dateNaissance}"/>" size="30" maxlength="60" />
 <span class="erreur">${form.erreurs['naissancePersonne']}</span>
 <br />
+
+<!-- GROUPE -->
+<label for="groupe">Groupe </label>
+<select name="groupe" id="groupe">
+	<option value="null">Choisir un groupe</option>
+	<option value="Groupe 1">Groupe 1</option>
+	<option value="Groupe 2">Groupe 2</option>
+	<option value="Groupe 3">Groupe 3</option>
+	<option value="Groupe 4">Groupe 4</option>
+</select>
+<span class="erreur">${form.erreurs['groupe']}</span>
+<br />
+
+<br />

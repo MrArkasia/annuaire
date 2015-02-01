@@ -21,6 +21,7 @@ public class Personne implements Serializable {
     private String siteWeb;
     private String dateNaissance;
     private String mp;
+    private String groupe;
     
 
 	public void setId( Long id ) {
@@ -76,6 +77,14 @@ public class Personne implements Serializable {
 
 	public void setDateNaissance(String dateNaissance) {
 		this.dateNaissance = dateNaissance;
+	}
+
+	public String getGroupe() {
+		return groupe;
+	}
+
+	public void setGroupe(String groupe) {
+		this.groupe = groupe;
 	}
 
 }

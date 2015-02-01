@@ -8,20 +8,23 @@
         <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/style.css" />
     </head>
     <body>
+    
     	<c:import url="/WEB-INF/inc/connexion.jsp" />
-        <c:import url="/WEB-INF/inc/menu.jsp" />
-        <div>
-            <form method="post" action="<c:url value="/action/my/creationPersonne"/>">
-            
-                <fieldset>
-                    <legend>Informations personne</legend>
-                    <c:import url="/WEB-INF/inc/inc_personne_form.jsp" />
-                    <p class="info">${ form.resultat }</p>
-                	<input type="submit" value="Valider"  />
-                	<input type="reset" value="Remettre à zéro" /> <br />
-                </fieldset>  
-                
-            </form>
-        </div>
+
+    	<%-- Vérification de la présence d'un objet utilisateur en session --%>
+    	<c:if test="${!empty sessionScope.sessionPersonne}">
+	        <c:import url="/WEB-INF/inc/menu.jsp" />
+	        <div>
+	        	<fieldset>
+	        	<legend>Informations personne</legend>
+		            <form method="post" action="<c:url value="/action/my/creationPersonne"/>">
+	                    <c:import url="/WEB-INF/inc/inc_personne_form.jsp" />
+	                	<input type="submit" value="Valider"  />
+	                	<input type="reset" value="Remettre à zéro" />  
+		            </form>
+		       		<p><br /><a href="<c:url value="/action/my/listePersonnes"/>">Retour</a></p>   
+	            </fieldset>
+	        </div>
+        </c:if>
     </body>
 </html>
