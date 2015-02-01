@@ -111,6 +111,7 @@ public final class ConnexionForm {
 			admin.setEmail("admin@mail.com");
 			admin.setNom("Administrateur");
 			session.setAttribute("sessionAdmin", admin);
+			session.setAttribute("sessionId", "-1");
 			trouver = true;
 		} 
 		else {
@@ -120,11 +121,10 @@ public final class ConnexionForm {
 				Object key= iterateur.next();
 				if( personnes.get(key).getEmail().equals(email) && personnes.get(key).getMp().equals(motDePasse) ){
 					trouver = true;
+					session.setAttribute("sessionId", key);
 				}
 			}
-			
 			if(!trouver){
-				System.out.println("L'email et/ou le mot de passe sont incorrecte");
 	    		throw new Exception( "L'email et/ou le mot de passe sont incorrecte" );
 			}
 		}

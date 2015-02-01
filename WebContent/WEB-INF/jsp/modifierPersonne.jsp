@@ -16,7 +16,6 @@
 		    <legend>Modification </legend>
 		        <form method="post" action="<c:url value="/action/my/modifierPersonne"><c:param name="idPersonne" value="${ mapPersonnes.key }" /></c:url>">
 			    	<c:import url="/WEB-INF/inc/inc_personne_form.jsp" />
-			    	<br />
 			      	<input type="submit" value="Valider"  /> 
 		      	</form>
 		      	<p><br /><a href="<c:url value="/action/my/listePersonnes"/>">Retour</a></p>

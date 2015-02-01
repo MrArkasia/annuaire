@@ -1,5 +1,10 @@
 package com.annuaire.controleur;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,26 +19,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.annuaire.dao.PersonneDao;
 import com.annuaire.entities.Personne;
-import com.annuaire.forms.ConnexionForm;
-import com.annuaire.forms.CreationPersonneBootstrap;
+import com.annuaire.forms.OutilsController;
 
 @Controller()
 @RequestMapping("/my")
 public class PersonneController {
 	
-	public static final String PARAM_ID_CLIENT = "idPersonne";
-    public static final String SESSION_CLIENTS = "personnes";
-    public static final String ATT_CLIENT      = "personne";
-    public static final String ATT_FORM        = "form";
-    public static final String ATT_USER        = "utilisateur";
     public static final String ATT_SESSION_USER= "sessionPersonne";
     public static final String ATT_SESSION_ADMIN="sessionAdmin";
+    
 	@EJB
     private PersonneDao personneDao;
 
     protected final Log logger = LogFactory.getLog(getClass());
     
-    CreationPersonneBootstrap bootstrap = new CreationPersonneBootstrap();
+    OutilsController outils = new OutilsController();
 
     /**************************** CREER PERSONNE *****************************/
 
@@ -44,7 +44,7 @@ public class PersonneController {
 
     @RequestMapping(value = "/creationPersonne", method = RequestMethod.POST)
     public String creerPersonne(ModelMap map,HttpServletRequest request, HttpServletResponse response) {
-	    return bootstrap.ajouterPersonne(request, personneDao);
+	    return outils.ajouterPersonne(request, personneDao);
 	}
 
     /**************************** LISTE PERSONNE *****************************/
@@ -58,44 +58,21 @@ public class PersonneController {
 
     @RequestMapping(value = "/suppressionPersonne", method = RequestMethod.GET)
     public String suppressionPersonne(HttpServletRequest request, HttpServletResponse response) {
-        return bootstrap.supprimerPersonne(request, personneDao);
+        return outils.supprimerPersonne(request, personneDao);
     }
 
     /**************************** FICHE PERSONNE *****************************/
     
     @RequestMapping(value = "/afficherPersonne", method = RequestMethod.GET)
     public String detailPersonne(HttpServletRequest request, HttpServletResponse response) {
-    	return bootstrap.trouverPersonne(request, personneDao, "afficherPersonne");
+    	return outils.trouverPersonne(request, personneDao, "afficherPersonne");
     }
     
     /******************************* CONNEXION *******************************/
     
     @RequestMapping(value = "/connexion", method = RequestMethod.POST)
     public String connexionPersonne(HttpServletRequest request, HttpServletResponse response) {
-
-    	HttpSession session = request.getSession();
-
-    	/* Préparation de l'objet formulaire */
-        ConnexionForm form = new ConnexionForm();
-
-        /* Traitement de la requête et récupération du bean en résultant */
-        Personne utilisateur = form.connecterPersonne( request );
-        
-        /*
-         * Si aucune erreur de validation n'a eu lieu, alors ajout du bean
-         * Personne à la session, sinon suppression du bean de la session.
-         */
-        if ( form.getErreurs().isEmpty() ) {
-            session.setAttribute( ATT_SESSION_USER, utilisateur );
-        } else {
-            session.setAttribute( ATT_SESSION_USER, null );
-        }
-
-        /* Stockage du formulaire et du bean dans l'objet request */
-        request.setAttribute( ATT_FORM, form );
-        request.setAttribute( ATT_USER, utilisateur );
-
-        return "listerPersonnes";
+    	return outils.connexion(request, personneDao);
     }
     
     /****************************** DECONNEXION ******************************/
@@ -105,7 +82,6 @@ public class PersonneController {
     	HttpSession session = request.getSession();
     	session.setAttribute( ATT_SESSION_USER , null );
     	session.setAttribute( ATT_SESSION_ADMIN, null );
-    	
     	return "listerPersonnes";
     }
     
@@ -113,16 +89,43 @@ public class PersonneController {
     
     @RequestMapping(value = "recuperationMotPasse", method = RequestMethod.GET)
     public String recuperationMotPasseGet(HttpServletRequest request, HttpServletResponse response) {
-
+    	HttpSession session = request.getSession();
+    	session.setAttribute("notFindMail", null);
+    	session.setAttribute("recoveryId", null);
     	return "recuperationMotPasse";
     }
     
     @RequestMapping(value = "recuperationMotPasse", method = RequestMethod.POST)
     public String recuperationMotPassePost(HttpServletRequest request, HttpServletResponse response) {
 
+    	boolean trouver = false;
+    	final String SESSION_CLIENTS = "personnes";
+    	String email = request.getParameter( "email" );
+    	HttpSession session = request.getSession();
+    	
+    	session.setAttribute("notFindMail", null);
+    	session.setAttribute("recoveryId", null);
+    	
+	    @SuppressWarnings("unchecked")
+		Map<Long, Personne> personnes = (HashMap<Long, Personne>) session.getAttribute( SESSION_CLIENTS );
+	    
+		@SuppressWarnings("rawtypes")
+		Set listKeys = personnes.keySet();
+    	
+    	@SuppressWarnings("rawtypes")
+		Iterator iterateur = listKeys.iterator();
+		while(iterateur.hasNext()) {
+			Object key= iterateur.next();
+			if( personnes.get(key).getEmail().equals(email)){
+				trouver = true;
+				session.setAttribute("recoveryId", key);
+			}
+		}
+		
+		if(!trouver) session.setAttribute("notFindMail", "yes");
+
     	return "recuperationMotPasse";
     }
-    
 
     /*************************** MODIFIER PERSONNE ***************************/
       
@@ -131,12 +134,12 @@ public class PersonneController {
     @RequestMapping(value = "/modifierPersonne", method = RequestMethod.GET)
     public String modifierPersonneGet(HttpServletRequest request, HttpServletResponse response) {
     	idtmp = request.getParameter("idPersonne");
-    	return bootstrap.trouverPersonne(request, personneDao, "modifierPersonne");
+    	return outils.trouverPersonne(request, personneDao, "modifierPersonne");
     }
     
     @RequestMapping(value = "/modifierPersonne", method = RequestMethod.POST)
     public String modifierPersonnePost(HttpServletRequest request, HttpServletResponse response) {
-    	return bootstrap.modifierPersonne(request, personneDao, idtmp);
+    	return outils.modifierPersonne(request, personneDao, idtmp);
     }
 
 }

@@ -8,9 +8,7 @@
         <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/style.css" />
     </head>
     <body>
-    
     	<c:import url="/WEB-INF/inc/connexion.jsp" />
-
     	<%-- Vérification de la présence d'un objet utilisateur en session --%>
     	<c:if test="${!empty sessionScope.sessionPersonne}">
 	        <c:import url="/WEB-INF/inc/menu.jsp" />

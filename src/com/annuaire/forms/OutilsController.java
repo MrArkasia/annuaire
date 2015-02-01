@@ -10,12 +10,15 @@ import com.annuaire.dao.DAOException;
 import com.annuaire.dao.PersonneDao;
 import com.annuaire.entities.Personne;
 
-public class CreationPersonneBootstrap {
+public class OutilsController {
 
 	public static final String PARAM_ID_CLIENT = "idPersonne";
     public static final String SESSION_CLIENTS = "personnes";
     public static final String ATT_CLIENT      = "personne";
     public static final String ATT_FORM        = "form";
+    public static final String ATT_USER        = "utilisateur";
+    public static final String ATT_SESSION_USER= "sessionPersonne";
+    public static final String ATT_SESSION_ADMIN="sessionAdmin";
 
     /*********************************** AJOUTER PERSONNE ****************************************/
     
@@ -50,6 +53,11 @@ public class CreationPersonneBootstrap {
 	public String trouverPersonne(HttpServletRequest request, PersonneDao personneDao, String page) {
 		Personne personne = null;
 		String idPersonne = getValeurParametre( request, PARAM_ID_CLIENT );
+		
+		if(idPersonne.equals("-1")){
+			return "listerPersonnes";
+		}
+		
 	    Long id = Long.parseLong( idPersonne );
 	    HttpSession session = request.getSession();
 	    @SuppressWarnings("unchecked")
@@ -137,6 +145,34 @@ public class CreationPersonneBootstrap {
 	    	return "creerPersonne";
 	    }
 
+	}
+	
+	/************************************* CONNEXION ******************************************/
+	
+	public String connexion(HttpServletRequest request, PersonneDao personneDao) {
+		HttpSession session = request.getSession();
+	
+		/* Préparation de l'objet formulaire */
+	    ConnexionForm form = new ConnexionForm();
+	
+	    /* Traitement de la requête et récupération du bean en résultant */
+	    Personne utilisateur = form.connecterPersonne( request );
+	    
+	    /*
+	     * Si aucune erreur de validation n'a eu lieu, alors ajout du bean
+	     * Personne à la session, sinon suppression du bean de la session.
+	     */
+	    if ( form.getErreurs().isEmpty() ) {
+	        session.setAttribute( ATT_SESSION_USER, utilisateur );
+	    } else {
+	        session.setAttribute( ATT_SESSION_USER, null );
+	    }
+	
+	    /* Stockage du formulaire et du bean dans l'objet request */
+	    request.setAttribute( ATT_FORM, form );
+	    request.setAttribute( ATT_USER, utilisateur );
+	
+	    return "listerPersonnes";
 	}
 
 	/************************************* UTILITAIRE ******************************************/	

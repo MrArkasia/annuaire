@@ -44,16 +44,6 @@ public final class CreationPersonneForm {
         String naissance 	= getValeurChamp( request, CHAMP_NAISSANCE );
         String groupe 		= getValeurChamp( request, CHAMP_GROUPE );
         
-        System.out.println("---------------------------");
-        System.out.println("Nom       : " + nom);
-        System.out.println("Preom     : " + prenom);
-        System.out.println("email     : " + email);
-        System.out.println("mp        : " + mp);
-        System.out.println("site      : " + site);
-        System.out.println("naissance : " + naissance);
-        System.out.println("groupe    : " + groupe);
-        System.out.println("---------------------------");
-        
         Personne personne = new Personne();
 
         traiterNom( nom, personne );
@@ -144,7 +134,7 @@ public final class CreationPersonneForm {
         } catch ( FormValidationException e ) {
             setErreur( CHAMP_GROUPE, e.getMessage() );
         }
-        personne.setDateNaissance( groupe );
+        personne.setGroupe( groupe );
     }
     
     
