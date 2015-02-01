@@ -9,6 +9,12 @@ import javax.persistence.TypedQuery;
 
 import com.annuaire.entities.Personne;
 
+/**
+ * 
+ * Classe PersonneDao
+ * @author amaury doudement michaelplong
+ *
+ */
 @Stateless
 public class PersonneDao {
 
@@ -17,10 +23,11 @@ public class PersonneDao {
     private EntityManager em;
 	
     /**
-	 * 
+	 * Methode de recherche des personnes
 	 * @param id
-	 * @return
+	 * identifiant de la personne
 	 * @throws DAOException
+	 * @see #DAOException( String message )
 	 */
     public Personne trouver( long id ) throws DAOException {
         try {
@@ -30,9 +37,10 @@ public class PersonneDao {
         }
     }
 	/**
-	 * 
+	 * Méthode de creation des personnes
 	 * @param personne
 	 * @throws DAOException
+	 * @see #DAOException( String message )
 	 */
     public void creer( Personne personne ) throws DAOException {
         try {
@@ -46,10 +54,11 @@ public class PersonneDao {
      * Méthode de listage des personnes
      * @return
      * @throws DAOException
+     * @see #DAOException( String message )
      */
     public List<Personne> lister() throws DAOException {
         try {
-            TypedQuery<Personne> query = em.createQuery( "SELECT c FROM Personne c ORDER BY c.id", Personne.class );
+            TypedQuery<Personne> query = em.createQuery( "SELECT c FROM Personne c ORDER BY c.nom", Personne.class );
             return query.getResultList();
         } catch ( Exception e ) {
             throw new DAOException( e );
@@ -57,9 +66,10 @@ public class PersonneDao {
     }
 
     /**
-     * 
+     * Methode de suppression des personnes
      * @param personne
      * @throws DAOException
+     * @see #DAOException( String message )
      */
     public void supprimer( Personne personne ) throws DAOException {
         try {

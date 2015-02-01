@@ -67,6 +67,12 @@ public class Personne implements Serializable {
      */
     private String dateNaissance;
     
+    /**
+     * Le groupe de la personne. La groupe est modifiable.
+     * 
+     * @see #setGroupe(String groupe)
+     * @see #getGroupe()
+     */
     private String groupe;
     
     /**

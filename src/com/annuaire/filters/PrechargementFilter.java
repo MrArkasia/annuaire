@@ -27,14 +27,9 @@ public class PrechargementFilter implements Filter {
     @EJB
     private PersonneDao          personneDao;
 
-    /**
-     * 
-     */
     public void init( FilterConfig filterConfig ) throws ServletException {
     }
-	/**
-	 * 
-	 */
+
     public void doFilter( ServletRequest req, ServletResponse res, FilterChain chain ) throws IOException,
             ServletException {
         /* Cast de l'objet request */
