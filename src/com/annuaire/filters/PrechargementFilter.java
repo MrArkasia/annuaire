@@ -25,27 +25,26 @@ public class PrechargementFilter implements Filter {
     public static final String ATT_SESSION_CLIENTS   = "personnes";
 
     @EJB
-    private PersonneDao          personneDao;
+    private PersonneDao personneDao;
 
     public void init( FilterConfig filterConfig ) throws ServletException {
     }
 
-    public void doFilter( ServletRequest req, ServletResponse res, FilterChain chain ) throws IOException,
-            ServletException {
+    public void doFilter( ServletRequest req, ServletResponse res, FilterChain chain ) throws IOException, ServletException {
         /* Cast de l'objet request */
         HttpServletRequest request = (HttpServletRequest) req;
 
-        /* R�cup�ration de la session depuis la requ�te */
+        /* Recuperation de la session depuis la requete */
         HttpSession session = request.getSession();
 
         /*
          * Si la map des personnes n'existe pas en session, alors l'utilisateur se
-         * connecte pour la premi�re fois et nous devons pr�charger en session
+         * connecte pour la premiere fois et nous devons precharger en session
          * les infos contenues dans la BDD.
          */
         if ( session.getAttribute( ATT_SESSION_CLIENTS ) == null ) {
             /*
-             * R�cup�ration de la liste des personnes existants, et enregistrement
+             * Recuperation de la liste des personnes existants, et enregistrement
              * en session
              */
             List<Personne> listePersonnes = personneDao.lister();
@@ -56,7 +55,7 @@ public class PrechargementFilter implements Filter {
             session.setAttribute( ATT_SESSION_CLIENTS, mapPersonnes );
         }
 
-        /* Pour terminer, poursuite de la requ�te en cours */
+        /* Pour terminer, poursuite de la requete en cours */
         chain.doFilter( request, res );
     }
 

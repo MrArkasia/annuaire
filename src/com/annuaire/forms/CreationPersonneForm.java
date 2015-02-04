@@ -9,6 +9,14 @@ import com.annuaire.dao.DAOException;
 import com.annuaire.dao.PersonneDao;
 import com.annuaire.entities.Personne;
 
+/**
+ * Classe pour la gestion du formulaire de creation de personne
+ * 
+ * @author Amaury Doudement
+ * @author Michael Plong
+ *
+ */
+
 public final class CreationPersonneForm {
     private static final String CHAMP_NOM       = "nomPersonne";
     private static final String CHAMP_PRENOM    = "prenomPersonne";

@@ -1,10 +1,13 @@
 package com.annuaire.dao;
+
 /**
- * 
  * Une classe d exception pour les fonctions liees au DAO
- * @author amaury doudement michaelplong
+ * 
+ * @author Amaury Doudement
+ * @author Michael Plong
  *
  */
+
 public class DAOException extends RuntimeException {
     /**
 	 * 

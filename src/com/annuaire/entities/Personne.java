@@ -6,11 +6,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
 /**
- * La classe personne
- * @author michaelplong amaury doudement
+ * La classe pour l'entite personne
+ * 
+ * @author Amaury Doudement
+ * @author Michael Plong
  *
  */
+
 @Entity
 public class Personne implements Serializable {
 
@@ -84,7 +88,7 @@ public class Personne implements Serializable {
     private String mp;
     
     /**
-    * Met à jour l'Id de la personne.
+    * Met a jour l'Id de la personne.
     * @param id
     * Le nouveau Id de la personne.
     */
@@ -102,7 +106,7 @@ public class Personne implements Serializable {
     }
 
     /**
-     * Met à jour le nom de la personne.
+     * Met a jour le nom de la personne.
      * @param nom
      * Le nouveau nom de la personne.
      */

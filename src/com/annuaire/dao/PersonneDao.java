@@ -10,11 +10,13 @@ import javax.persistence.TypedQuery;
 import com.annuaire.entities.Personne;
 
 /**
+ * Class qui impl�mente l'interface DAO pour la JPA
  * 
- * Classe PersonneDao
- * @author amaury doudement michaelplong
+ * @author Amaury Doudement
+ * @author Michael Plong
  *
  */
+
 @Stateless
 public class PersonneDao {
 
@@ -36,8 +38,9 @@ public class PersonneDao {
             throw new DAOException( e );
         }
     }
+    
 	/**
-	 * Méthode de creation des personnes
+	 * Methode de creation des personnes
 	 * @param personne
 	 * @throws DAOException
 	 * @see #DAOException( String message )
@@ -51,7 +54,7 @@ public class PersonneDao {
     }
 
     /**
-     * Méthode de listage des personnes
+     * Methode pour obtenir la liste des personnes
      * @return
      * @throws DAOException
      * @see #DAOException( String message )

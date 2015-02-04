@@ -1,6 +1,3 @@
-/**
- * Package contenant le controlleur de l'application
- */
 package com.annuaire.controleur;
 
 import java.util.HashMap;
@@ -22,17 +19,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.annuaire.dao.PersonneDao;
 import com.annuaire.entities.Personne;
-import com.annuaire.forms.OutilsController;
+
 /**
- * Controller de l application
- * @author michaelplong et amaury doudement
+ * Controller Spring MVC de l application
+ * 
+ * @author Amaury Doudement
+ * @author Michael Plong
  *
  */
+
 @Controller()
 @RequestMapping("/my")
 public class PersonneController {
 	
-    public static final String ATT_SESSION_USER= "sessionPersonne";
+    public static final String ATT_SESSION_USER	= "sessionPersonne";
     public static final String ATT_SESSION_ADMIN="sessionAdmin";
     
 	@EJB
@@ -40,7 +40,7 @@ public class PersonneController {
 
     protected final Log logger = LogFactory.getLog(getClass());
     
-    OutilsController outils = new OutilsController();
+    Outils outils = new Outils();
 
     /**************************** CREER PERSONNE *****************************/
    

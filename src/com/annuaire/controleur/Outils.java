@@ -1,4 +1,4 @@
-package com.annuaire.forms;
+package com.annuaire.controleur;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,8 +9,18 @@ import javax.servlet.http.HttpSession;
 import com.annuaire.dao.DAOException;
 import com.annuaire.dao.PersonneDao;
 import com.annuaire.entities.Personne;
+import com.annuaire.forms.ConnexionForm;
+import com.annuaire.forms.CreationPersonneForm;
 
-public class OutilsController {
+/**
+ * Cette classe implemente des outils pour la classe PersonneController
+ * 
+ * @author Amaury Doudement
+ * @author Michael Plong
+ *
+ */
+
+public class Outils {
 
 	public static final String PARAM_ID_CLIENT = "idPersonne";
     public static final String SESSION_CLIENTS = "personnes";

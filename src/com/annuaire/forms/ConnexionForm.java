@@ -10,6 +10,14 @@ import javax.servlet.http.HttpSession;
 
 import com.annuaire.entities.Personne;
 
+/**
+ * Classe pour la gestion du formulaire de connexion
+ * 
+ * @author Amaury Doudement
+ * @author Michael Plong
+ *
+ */
+
 public final class ConnexionForm {
     private static final String CHAMP_EMAIL  = "email";
     private static final String CHAMP_PASS   = "motdepasse";
@@ -29,11 +37,12 @@ public final class ConnexionForm {
     /**
      * Methode permettant la connection et qui verifie si l'email, le mot de passe est valide,
      * ainsi que si la personne est presente en base
+     * 
      * @param request
      * @return utilisateur si le resultat de la requete est valide sinon erreur
      */
     public Personne connecterPersonne( HttpServletRequest request ) {
-        /* R�cup�ration des champs du formulaire */
+        /* Recuperation des champs du formulaire */
         String email = getValeurChamp( request, CHAMP_EMAIL );
         String motDePasse = getValeurChamp( request, CHAMP_PASS );
 
@@ -63,7 +72,7 @@ public final class ConnexionForm {
             setErreur( CHAMP_PASS, e.getMessage() );
         }
 
-        /* Initialisation du r�sultat global de la validation. */
+        /* Initialisation du resultat global de la validation. */
         if ( erreurs.isEmpty() ) {
             resultat = "Succ�s de la connexion.";
         } else {
@@ -76,6 +85,7 @@ public final class ConnexionForm {
 
     /**
      * Methode qui valide l'adresse email saisie.
+     * 
      * @param email
      * @throws Exception
      */
@@ -91,6 +101,7 @@ public final class ConnexionForm {
 
     /**
      * Methode qui valide le mot de passe saisi.
+     * 
      * @param motDePasse
      * @throws Exception
      */
@@ -108,6 +119,7 @@ public final class ConnexionForm {
     /**
      * 
      * Methode qui valide la presence en base.
+     * 
      * @param email
      * @param motDePasse
      * @param request
@@ -151,6 +163,7 @@ public final class ConnexionForm {
 
     /**
      * Ajoute un message correspondant au champ specifique a la map des erreurs.
+     * 
      * @param champ
      * @param message
      * message d erreur
@@ -161,8 +174,8 @@ public final class ConnexionForm {
 
     
     /**
-     * Methode utilitaire qui retourne null si un champ est vide, et son contenu
-     * sinon.
+     * Methode utilitaire qui retourne null si un champ est vide, et son contenu sinon.
+     * 
      * @param request
      * @param nomChamp
      * @return valeur

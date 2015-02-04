@@ -1,24 +1,26 @@
-package com.annuaire.dao;
+package com.annuaire.tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import javax.naming.InitialContext;
-
-import junit.framework.Assert;
 
 import org.apache.openejb.core.ivm.naming.NamingException;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.annuaire.dao.PersonneDao;
 import com.annuaire.entities.Personne;
 
 /**
- * Classe TestDao
+ * Classe de test pour la DAO
  * 
- * @author amaury doudement michaelplong
+ * @author Amaury Doudement
+ * @author Michael Plong
  *
  */
+
 public class TestDao {
 
    static PersonneDao dao;
@@ -89,7 +91,8 @@ public class TestDao {
    
    @Test
    public void testReadAccess() throws Exception {
-	    Runnable execution = new Runnable() {
+	    @SuppressWarnings("unused")
+		Runnable execution = new Runnable() {
 	        public void run() {
 	        	 // prepare client context
 	            InitialContext context = null;
@@ -114,8 +117,8 @@ public class TestDao {
 					e.printStackTrace();
 				}
 	            // test and use it
-	            Assert.assertTrue(ref instanceof PersonneDao);
-	            Assert.assertNotNull(dao.trouver(4));
+	            assertTrue(ref instanceof PersonneDao);
+	            assertNotNull(dao.trouver(4));
 	        }
 	    };
 	    
